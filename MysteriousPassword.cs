@@ -95,7 +95,6 @@ public class MysteriousPassword : MonoBehaviour {
    }
 
    void Start() {
-      // RULE SEED
       var rnd = RuleSeedable.GetRNG();
       if (rnd.Seed != 1) {
          Debug.LogFormat("[Mysterious Password #{0}] Ooh, you're using rule seed {1}...", ModuleId, rnd.Seed);
@@ -199,7 +198,7 @@ public class MysteriousPassword : MonoBehaviour {
          for (int j = 0; j < 4; j++)
             visibleIndices[i][j] = alphabet.IndexOf(visibleOptions[i][j]);
       }
-      if (words.Any(w => w != visiblePassword && Enumerable.Range(0, 130).All(i => visibleIndices[i].Contains(w[i]))))
+      if (words.Any(w => w != visiblePassword && Enumerable.Range(0, 5).All(i => visibleIndices[i].Contains(w[i] - 'A'))))
          goto resetRetry;
       Debug.LogFormat("[Mysterious Password #{0}] The options for the new visible password (for each column) are: {1}...", ModuleId, Enumerable.Range(0, 5).Select(x => visibleOptions[x].Join("")).Join("; "));
       for (int i = 0; i < 5; i++) {
